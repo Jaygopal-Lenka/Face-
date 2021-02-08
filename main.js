@@ -20,5 +20,24 @@ Webcam.set({
  classifier = ml5.imageClassifier('https://teachablemachine.withgoogle.com/models/5Mlr3grq3/model.json',modelLoaded);
  
  function modelLoaded() {
+ 
      console.log('model_loaded');
  }
+ 
+ function check() {
+ 
+     img = document.getElementById('captured_image');
+     classifier.classify(img,getResult);
+ }
+ 
+ function getResult(error,results) {
+ 
+     if(error) {
+         console.error(error);
+     } else {
+         console.log(results);
+         document.getElementById("result_object_name").innerHTML= results[0].label;
+         document.getElementById("result_object_accuracy").innerHTML= results[0].confidence.toFixed(3);
+     }
+ }
+ 
